@@ -44,19 +44,8 @@ articleView.handleCategoryFilter = function() {
 
 articleView.handleMainNav = function () {
   $('.main-nav').on('click', '.tab', function() {
-    /* TODO:
-      1. Hide all of the .tab-content sections
-      2. Fade in the single .tab-content section that is
-        associated with the .tab element's data-content attribute.
-    */
-    // look at in morning. 
-  // if ($(this).val()) {
-  //   $('.tab-content').hide();
-  //   $('.tab-content[id="article"]').fadeIn()
-  // } else {
-  //   $('.tab-content').fadeIn();
-  // }
-console.log($(this).val());
+    $('.tab-content').hide();
+    $('#' + $(this).attr('data-content')).fadeIn()
   });
   $('.main-nav .tab:first').click();
 };
