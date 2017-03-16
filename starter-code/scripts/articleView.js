@@ -18,25 +18,29 @@ articleView.populateFilters = function() {
 articleView.handleAuthorFilter = function() {
   $('#author-filter').on('change', function() {
     if ($(this).val()) {
-      /* TODO: If the select box changes to an option that has a value, we should:
-          1. Hide all of the articles
-          2. Fade in only the articles that match based on on the author
-            that was aselected. Hint: use an attribute selector to find
-            those articles that match the value, and then fade them in.
-        */
+      $('article').hide('fast');
+      $('article[data-author="' + $(this).val() + '"]').fadeIn('slow')
     } else {
-    /* Otherwise, we should:
-        1. Show all the articles except the template */
+      $('article').fadeIn();
+      $('article.template').hide();
     }
     $('#category-filter').val('');
   });
 };
 
 articleView.handleCategoryFilter = function() {
-  /* TODO: Just like we do for #author-filter above, we should also handle
-  change events on the #category-filter element. Be sure to reset the
-  #author-filter while you're at it! */
-};
+  $('#category-filter').on('change', function() {
+    if ($(this).val()) {
+      console.log($(this).val());
+      $('article').hide('fast');
+      $('article[data-category="' + $(this).val() + '"]').fadeIn('slow');
+    } else {
+      $('article').fadeIn();
+      $('article.template').hide();
+    }
+    $('#author-filter').val('');
+  }
+)};
 
 articleView.handleMainNav = function () {
   $('.main-nav').on('click', '.tab', function() {
@@ -45,6 +49,14 @@ articleView.handleMainNav = function () {
       2. Fade in the single .tab-content section that is
         associated with the .tab element's data-content attribute.
     */
+    // look at in morning. 
+  // if ($(this).val()) {
+  //   $('.tab-content').hide();
+  //   $('.tab-content[id="article"]').fadeIn()
+  // } else {
+  //   $('.tab-content').fadeIn();
+  // }
+console.log($(this).val());
   });
   $('.main-nav .tab:first').click();
 };
@@ -62,4 +74,8 @@ articleView.setTeasers = function() {
   */
 };
 
-// TODO: Invoke all of the above functions (I mean, methods!):
+articleView.populateFilters();
+articleView.handleAuthorFilter();
+articleView.handleCategoryFilter();
+articleView.handleMainNav();
+articleView.setTeasers();
